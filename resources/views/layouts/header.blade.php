@@ -15,23 +15,34 @@
         </ul>
         <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
             <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
-                <a href="https://adminmart.com/product/modernize-free-bootstrap-admin-dashboard/" target="_blank"
-                    class="btn btn-primary">Download Free</a>
+                <a class="btn btn-primary">{{ Auth::user()->name }}</a>
                 <li class="nav-item dropdown">
                     <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="{{ asset('assets/images/profile/user-1.jpg') }}" alt="" width="35"
-                            height="35" class="rounded-circle">
+                        @if (Auth::user()->photo)
+                            <img src="{{ asset(Auth::user()->photo) }}" alt="" width="35" height="35"
+                                class="rounded-circle">
+                        @endif
+
+                        @if (Auth::user()->gender == 1 && !Auth::user()->photo)
+                            <img src="{{ asset('assets/images/profile/user-1.jpg') }}" alt="" width="35"
+                                height="35" class="rounded-circle">
+                        @endif
+
+                        @if (Auth::user()->gender == 2 && !Auth::user()->photo)
+                            <img src="{{ asset('assets/images/profile/female.avif') }}" alt="" width="35"
+                                height="35" class="rounded-circle">
+                        @endif
                     </a>
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                         <div class="message-body">
-                            <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                            <a href="{{ route('profile') }}" class="d-flex align-items-center gap-2 dropdown-item">
                                 <i class="ti ti-user fs-6"></i>
                                 <p class="mb-0 fs-3">My Profile</p>
                             </a>
-                            <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                            <a href="{{ route('new_post') }}" class="d-flex align-items-center gap-2 dropdown-item">
                                 <i class="ti ti-mail fs-6"></i>
-                                <p class="mb-0 fs-3">My Account</p>
+                                <p class="mb-0 fs-3">New Post</p>
                             </a>
                             <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
                                 <i class="ti ti-list-check fs-6"></i>
