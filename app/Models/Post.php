@@ -18,4 +18,9 @@ class Post extends Model
     {
         return $this->hasOne(User::class, 'id', 'user_id');
     }
+
+    function get_like($user_id, $post_id)
+    {
+        return Like::where('user_id', $user_id)->where('post_id', $post_id)->exists();
+    }
 }
