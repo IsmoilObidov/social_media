@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -40,5 +41,30 @@ class PostController extends Controller
         ]);
 
         return back()->with('success', 'New post uploaded');
+    }
+
+
+
+
+
+    function post($id)
+    {
+        return view('comment', ['post' => Post::find($id), 'comments' => Comment::where('post_id', $id)->orderBy('id','desc')->get()]);
+    }
+
+    function save_comment($id, Request $req)
+    {
+
+        $validate = $req->validate([
+            'comment' => 'required'
+        ]);
+
+        Comment::create([
+            'user_id' => Auth::id(),
+            'post_id' => $id,
+            'text' => $req->comment,
+        ]);
+
+        return back()->with('success', 'New comment uploaded');
     }
 }
