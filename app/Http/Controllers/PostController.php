@@ -10,6 +10,14 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
+
+    public function my_post()
+    {
+        return view('my_post', ['posts' => Post::where('user_id', Auth::id())->get()]);
+    }
+
+
+
     function index()
     {
         return view('welcome', ['posts' => Post::all()]);
@@ -33,6 +41,12 @@ class PostController extends Controller
             $req->file('photo')->store('public/posts');
             $path = 'storage/posts/' . $req->file('photo')->hashName();
         }
+
+        function my_post()
+        {
+            return view('my_post');
+        }
+
 
         Post::create([
             'user_id' => Auth::id(),
@@ -69,6 +83,9 @@ class PostController extends Controller
         return back()->with('success', 'New comment uploaded');
     }
 
+
+
+
     function do_like(Request $req)
     {
         $existingLike = Like::withTrashed()->where('user_id', Auth::id())->where('post_id', $req->post_id)->first();
@@ -84,7 +101,7 @@ class PostController extends Controller
                 return 'removed_like';
             }
         } else {
-            
+
             Like::create([
                 'user_id' => Auth::id(),
                 'post_id' => $req->post_id
