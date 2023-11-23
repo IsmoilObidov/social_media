@@ -40,6 +40,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/save_comment/{id}', [PostController::class, 'save_comment'])->name('save_comment');
 
     Route::post('/like-post', [PostController::class, 'do_like'])->name('do_like');
-
     Route::get('/delete_comment/{id}', [PostController::class, 'delete_comment'])->name('delete_comment');
 });

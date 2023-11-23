@@ -102,8 +102,6 @@
                                             @else
                                                 <input type="text" id="comment" name="comment" class="form-control">
                                             @endif
-
-
                                             <button type="submit" class="btn btn-outline-secondary"
                                                 data-bs-toggle="tooltip" data-bs-placement="top" title="Info"><svg
                                                     xmlns="http://www.w3.org/2000/svg"

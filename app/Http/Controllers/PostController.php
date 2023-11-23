@@ -84,7 +84,6 @@ class PostController extends Controller
                 return 'removed_like';
             }
         } else {
-
             Like::create([
                 'user_id' => Auth::id(),
                 'post_id' => $req->post_id
