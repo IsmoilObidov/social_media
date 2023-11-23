@@ -43,4 +43,9 @@ class UserController extends Controller
 
         return back()->with('success', 'Updated successfully');
     }
+
+    function filter_user(Request $req)
+    {
+        return User::where('name', 'LIKE', '%' . $req->text . '%')->get();
+    }
 }
