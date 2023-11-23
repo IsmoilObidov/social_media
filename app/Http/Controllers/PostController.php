@@ -101,7 +101,6 @@ class PostController extends Controller
                 return 'removed_like';
             }
         } else {
-
             Like::create([
                 'user_id' => Auth::id(),
                 'post_id' => $req->post_id
@@ -109,5 +108,10 @@ class PostController extends Controller
 
             return 'liked';
         }
+    }
+    function delete_comment($id)
+    {
+        Comment::where('id', '=', $id)->first()->delete();
+        return back();
     }
 }
