@@ -19,20 +19,8 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        @if (Auth::user()->photo)
-                            <img src="{{ asset(Auth::user()->photo) }}" alt="" width="35" height="35"
-                                class="rounded-circle">
-                        @endif
-
-                        @if (Auth::user()->gender == 1 && !Auth::user()->photo)
-                            <img src="{{ asset('assets/images/profile/user-1.jpg') }}" alt="" width="35"
-                                height="35" class="rounded-circle">
-                        @endif
-
-                        @if (Auth::user()->gender == 2 && !Auth::user()->photo)
-                            <img src="{{ asset('assets/images/profile/female.avif') }}" alt="" width="35"
-                                height="35" class="rounded-circle">
-                        @endif
+                        <img src="{{ asset(Auth::user()->photo) }}" alt="" width="35" height="35"
+                            class="rounded-circle">
                     </a>
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                         <div class="message-body">

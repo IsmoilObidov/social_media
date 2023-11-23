@@ -17,12 +17,22 @@ class AuthController extends Controller
             'password' => 'required|min:5'
         ]);
 
-        User::create([
+        $user = User::create([
             'name' => $validate['name'],
             'email' =>  $validate['email'],
             'gender' =>  $req->gender,
             'password' => Hash::make($validate['password'])
         ]);
+
+        if ($req->gender == 1) {
+            $user->update([
+                'photo' => 'assets/images/profile/user-1.jpg'
+            ]);
+        } else {
+            $user->update([
+                'photo' => 'assets/images/profile/female.avif'
+            ]);
+        }
 
         return $this->login($req);
     }
