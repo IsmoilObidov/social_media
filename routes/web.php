@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Route;
 
 
@@ -32,11 +33,18 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/create_post', [PostController::class, 'create_post']);
 
 
-    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
+    Route::get('/my_post', [PostController::class, 'my_post'])->name('my_post');
+
+
+
+
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
     Route::get('/post/{id}', [PostController::class, 'post'])->name('post');
     Route::post('/save_comment/{id}', [PostController::class, 'save_comment'])->name('save_comment');
 
     Route::post('/like-post', [PostController::class, 'do_like'])->name('do_like');
+    Route::post('/filter_user', [UserController::class, 'filter_user'])->name('filter_user');
+    Route::get('/delete_comment/{id}', [PostController::class, 'delete_comment'])->name('delete_comment');
 });
