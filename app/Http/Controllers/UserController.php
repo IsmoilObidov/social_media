@@ -48,4 +48,9 @@ class UserController extends Controller
     {
         return User::where('name', 'LIKE', '%' . $req->text . '%')->get();
     }
+
+    function review($email)
+    {
+        return view('user_profile', ['user' => User::where('email', $email)->first()]);
+    }
 }

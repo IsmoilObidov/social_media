@@ -25,6 +25,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/', [PostController::class, 'index'])->name('/');
 
+    Route::get('/review/{email}', [UserController::class, 'review'])->name('user-profile');
+
 
     Route::get('/profile', [UserController::class, 'profile'])->name('profile');
     Route::post('/edit_profile', [UserController::class, 'edit_profile'])->name('edit_profile');
@@ -47,4 +49,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/like-post', [PostController::class, 'do_like'])->name('do_like');
     Route::post('/filter_user', [UserController::class, 'filter_user'])->name('filter_user');
     Route::get('/delete_comment/{id}', [PostController::class, 'delete_comment'])->name('delete_comment');
+
+
+
+    Route::get('/edit_post/{id}', [PostController::class, 'edit_post'])->name('edit_post');
+    Route::post('/save_edit_post/{id}', [PostController::class, 'save_edit_post'])->name('save_edit_post');
+
+    Route::get('/delete_post/{id}', [PostController::class, 'delete_post'])->name('delete_post');
 });
