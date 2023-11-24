@@ -14,18 +14,26 @@
             <ul id="sidebarnav">
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                    <span class="hide-menu">Home</span>
+                    <span class="hide-menu">Main</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="./authentication-login.html" aria-expanded="false">
+                    <a class="sidebar-link" href="{{ route('/') }}" aria-expanded="false">
                         <span>
-                            <i class="ti ti-login"></i>
+                            <i class="ti ti-home"></i>
                         </span>
-                        <span class="hide-menu">Log</span>
+                        <span class="hide-menu">Home</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{ route('new_post') }}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-file-plus"></i>
+                        </span>
+                        <span class="hide-menu">New post</span>
                     </a>
                 </li>
             </ul>
-            
+
         </nav>
         <!-- End Sidebar navigation -->
     </div>
