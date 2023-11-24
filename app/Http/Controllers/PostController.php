@@ -114,4 +114,45 @@ class PostController extends Controller
         Comment::where('id', '=', $id)->first()->delete();
         return back();
     }
+
+
+
+
+    function edit_post($id)
+    {
+        return view('edit-post', ['post' => Post::find($id)]);
+    }
+
+
+
+    function save_edit_post($id, Request $req)
+    {
+        $validate = $req->validate([
+            'text' => 'required|max:1000'
+        ]);
+
+
+        if ($req->file('photo')) {
+            $req->file('photo')->store('public/posts');
+            $path = 'storage/posts/' . $req->file('photo')->hashName();
+            Post::find($id)->update([
+                'photo' => $path,
+            ]);
+        }
+
+
+        Post::find($id)->update([
+            'text' => $validate['text'],
+        ]);
+
+
+        return back()->with('success', 'Post edited');
+    }
+
+    function delete_post(Post $id)
+    {
+        $id->delete();
+
+        return back();
+    }
 }
