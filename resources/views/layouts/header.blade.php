@@ -83,6 +83,10 @@
 
         }
 
+        function asset(path) {
+            return `{{ asset('${path}') }}`;
+        }
+
         function ListItemGenerator(inputTxt, data, list_group) {
             if (!inputTxt.value) {
                 inputTxt.parentElement.classList.remove("active");
@@ -99,7 +103,7 @@
 
                 function CreatingList(Words) {
                     let createdList = Words.map(function(word) {
-                        return "<li>" + word.name + "</li>";
+                        return `<a style='text-decoration:none;' href='/review/${word.email}'><li><img src="${ asset(word.photo) }" width="30px" height="30px" style="border-radius:50%"> ${word.name}</li></a>`;
                     });
                     let CustomListItem;
                     if (!CreatingList.length) {

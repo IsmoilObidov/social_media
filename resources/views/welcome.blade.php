@@ -7,8 +7,7 @@
                     @foreach ($posts as $p)
                         <div class="col-md-4">
                             <h5 class="card-title fw-semibold mb-4">
-                                <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="nav-link nav-icon-hover" href="/review/{{ $p->get_user->email }}" id="drop2">
                                     <img src="{{ asset($p->get_user->photo) }}" alt="" width="35" height="35"
                                         class="rounded-circle">
                                     {{ $p->get_user->name }}
@@ -17,7 +16,10 @@
                             <div class="card">
                                 <img src="{{ asset($p->photo) }}" class="card-img-top" alt="..." height="200px">
                                 <div class="card-body" style="overflow: auto">
-                                    <h5 class="card-title">Card title</h5>
+                                    <h5 class="card-title">
+                                        <hr>
+
+                                    </h5>
                                     <p style="height:150px;" class="card-text">{{ $p->text }}</p>
                                 </div>
                                 <div class="card-footer">
