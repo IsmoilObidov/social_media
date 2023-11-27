@@ -30,6 +30,8 @@
 
                 @yield('main')
 
+                
+
             </div>
         </div>
     </div>
