@@ -177,8 +177,7 @@ class PostController extends Controller
                 'follower_id' => $req->post_id
             ]);
 
-            return 'follow';
+            return 'follower and chat';
         }
-
 }
 }
