@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ChatController;
+use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -55,9 +57,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/follow/{id}', [PostController::class, 'follow'])->name('follow');
 
+    Route::post('/follow_user', [FollowerController::class, 'follow'])->name('follow');
 
-
-
+    Route::get('/chat',[ChatController::class,'index'])->name('chat');
 
 });
 
