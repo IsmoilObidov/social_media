@@ -155,7 +155,7 @@ class PostController extends Controller
         $id->delete();
 
         return back();
-    }
+    }post and ChatController
  
     function follow (Request $req)
     {
