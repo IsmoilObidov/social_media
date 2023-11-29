@@ -34,8 +34,25 @@
                 </li>
             </ul>
 
+            <ul id="sidebarnav">
+                <li class="nav-small-cap">
+                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                    <span class="hide-menu">Chat</span>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{ route('chat') }}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-brand-twitch"></i>
+                        </span>
+                        <span class="hide-menu">Chat</span>
+                    </a>
+                </li>
+            </ul>
+
         </nav>
         <!-- End Sidebar navigation -->
     </div>
     <!-- End Sidebar scroll-->
+
+
 </aside>

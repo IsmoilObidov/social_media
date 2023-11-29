@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ChatController;
+use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -37,4 +39,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/edit_post/{id}', [PostController::class, 'edit_post'])->name('edit_post');
     Route::post('/save_edit_post/{id}', [PostController::class, 'save_edit_post'])->name('save_edit_post');
     Route::get('/delete_post/{id}', [PostController::class, 'delete_post'])->name('delete_post');
+
+
+    Route::post('/follow_user', [FollowerController::class, 'follow'])->name('follow');
+
+    Route::get('/chat',[ChatController::class,'index'])->name('chat');
+
 });
