@@ -26,56 +26,37 @@
                             <ul class="users">
                                 {{-- chatter --}}
                                 @foreach ($chatters as $ch)
-                                    <li class="person" data-chat="chat{{ $ch->id }}"
-                                        onclick="on_chat({{ $ch->id }})">
-                                        <div class="user">
-                                            <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png"
-                                                alt="Retail Admin">
-                                            <span class="status busy"></span>
-                                        </div>
-                                        <p class="name-time">
-                                            <span class="name">{{ $ch->get_user($ch->id)->name }}</span>
-                                            <span
-                                                class="time">{{ \Carbon\Carbon::parse($ch->created_at)->format('d/m/Y') }}</span>
-                                        </p>
-                                    </li>
+                                    <div id="chat">
+                                        <li class="person" data-chat="chat{{ $ch->id }}"
+                                            onclick="on_chat({{ $ch->id }})">
+                                            <div class="user">
+                                                <img src="{{ asset($ch->get_user($ch->id)->photo) }}" alt="Retail Admin">
+
+                                            </div>
+
+                                            <p class="name-time">
+                                                <span class="name">{{ $ch->get_user($ch->id)->name }}</span>
+                                                <span
+                                                    class="time">{{ \Carbon\Carbon::parse($ch->created_at)->format('d/m/Y') }}</span>
+                                            </p>
+                                        </li>
+                                    </div>
                                 @endforeach
                             </ul>
                         </div>
                     </div>
                     <div class="col-xl-8 col-lg-8 col-md-8 col-sm-9 col-9">
-                        {{-- <div class="selected-user">
-                                <span>To: <span class="name">Emily Russell</span></span>
+                        <div class="selected-user">
+                            <span>To: <span class="name"></span></span>
+                        </div>
+                        <div class="chat-container">
+                            <ul class="chat-box chatContainerScroll" id="chatbox">
+
+                            </ul>
+                            <div class="form-group mt-3 mb-0" id="textarea">
+
                             </div>
-                            <div class="chat-container">
-                                <ul class="chat-box chatContainerScroll">
-                                    <li class="chat-left">
-                                        <div class="chat-avatar">
-                                            <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png"
-                                                alt="Retail Admin">
-                                            <div class="chat-name">Russell</div>
-                                        </div>
-                                        <div class="chat-text">Hello, I'm Russell.
-                                            <br>How can I help you today?
-                                        </div>
-                                        <div class="chat-hour">08:55 <span class="fa fa-check-circle"></span></div>
-                                    </li>
-                                    <li class="chat-right">
-                                        <div class="chat-hour">08:56 <span class="fa fa-check-circle"></span></div>
-                                        <div class="chat-text">Hi, Russell
-                                            <br> I need more information about Developer Plan.
-                                        </div>
-                                        <div class="chat-avatar">
-                                            <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png"
-                                                alt="Retail Admin">
-                                            <div class="chat-name">Sam</div>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <div class="form-group mt-3 mb-0">
-                                    <input type="text" class="form-control" style="position: fixed;bottom: 40px; width: 100vh">
-                                </div>
-                            </div> --}}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -86,7 +67,76 @@
 
     <script>
         function on_chat(id) {
+            var settings = {
+                "url": "http://social.loc/chat/" + id,
+                "method": "GET",
+                "timeout": 0
+            };
 
+            $.ajax(settings).done(function(response) {
+                $('#chatbox').html('');
+
+                for (const i of response) {
+                    if (i.position == 'right') {
+                        $('#chatbox').append(`
+                            <li class="chat-${i.position}" id="${i.id}">
+                                <div class="chat-hour">${i.created_at}</div>
+                                <div class="chat-text">${i.text}</div>
+                                <div class="chat-avatar">
+                                    <img src="${i.user_avatar}"
+                                        alt="Retail Admin">
+                                    <div class="chat-name">${i.user_name}</div>
+                                </div>
+                            </li>
+                        `);
+
+                    } else {
+                        $('#chatbox').append(`
+                            <li class="chat-${i.position}" id="${i.id}">
+                                <div class="chat-avatar">
+                                    <img src="${i.user_avatar}" alt="Retail Admin">
+                                    <div class="chat-name">${i.user_name}</div>
+                                </div>
+                                <div class="chat-text">${i.text}
+                                </div>
+                                <div class="chat-hour">${i.created_at}</div>
+                            </li>
+                        `);
+                    }
+
+                }
+                $('#textarea').html('');
+                $('#textarea').html(`
+                <input type="text" class="form-control" id='message'
+                                    style="position: fixed;bottom: 40px; width: 100vh" onkeyup="send_message(${response[0] ? response[0].chat_id : null})">
+                `);
+
+            });
+
+        }
+
+        function send_message(id) {
+            var form = new FormData();
+            form.append("chat_id", id);
+            form.append("receiver_id", id);
+            form.append("message", $('#message').val());
+            form.append("_token", '{{ csrf_token() }}');
+
+            var settings = {
+                "url": "http://social.loc//chat/" + id + "/send_message",
+                "method": "POST",
+                "timeout": 0,
+                "processData": false,
+                "mimeType": "multipart/form-data",
+                "contentType": false,
+                "data": form
+            };
+
+            $.ajax(settings).done(function(response) {
+
+
+
+            });
         }
     </script>
 @endsection

@@ -59,8 +59,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/follow_user', [FollowerController::class, 'follow'])->name('follow');
 
-    Route::get('/chat',[ChatController::class,'index'])->name('chat');
+    Route::get('/chat', [ChatController::class, 'index'])->name('chat');
 
+    Route::get('/chat/{id}', [ChatController::class, 'chat_messages'])->name('chat_messages');
+
+    Route::post('/chat/{id}/send_message',[ChatController::class,'send_message'])->name('send_message');
 });
 
 
