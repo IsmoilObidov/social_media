@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Follow;
 use App\Models\Like;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -114,4 +115,69 @@ class PostController extends Controller
         Comment::where('id', '=', $id)->first()->delete();
         return back();
     }
+
+
+
+
+    function edit_post($id)
+    {
+        return view('edit-post', ['post' => Post::find($id)]);
+    }
+
+
+
+    function save_edit_post($id, Request $req)
+    {
+        $validate = $req->validate([
+            'text' => 'required|max:1000'
+        ]);
+
+
+        if ($req->file('photo')) {
+            $req->file('photo')->store('public/posts');
+            $path = 'storage/posts/' . $req->file('photo')->hashName();
+            Post::find($id)->update([
+                'photo' => $path,
+            ]);
+        }
+
+
+        Post::find($id)->update([
+            'text' => $validate['text'],
+        ]);
+
+
+        return back()->with('success', 'Post edited');
+    }
+
+    function delete_post(Post $id)
+    {
+        $id->delete();
+
+        return back();
+    }
+ 
+    function follow (Request $req)
+    {
+        $existingFollow = Follow::withTrashed()->where('user_id', Auth::id())->where('post_id', $req->post_id)->first();
+
+        if ($existingFollow) {
+            if ($existingFollow->trashed()) {
+
+                $existingFollow->restore();
+                return 'restored_follow';
+            } else {
+
+                $existingFollow->delete();
+                return 'removed_follow';
+            }
+        } else {
+            Follow::create([
+                'user_id' => Auth::id(),
+                'follower_id' => $req->post_id
+            ]);
+
+            return 'follower and chat';
+        }
+}
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Follower;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -48,4 +49,30 @@ class UserController extends Controller
     {
         return User::where('name', 'LIKE', '%' . $req->text . '%')->get();
     }
+
+    function review($email)
+    {
+        return view('user_profile', ['user' => User::where('email', $email)->first()]);
+    }
+
+
+
+    
+    // function follower(Request $req)
+    // {
+    //     $validation = $req->validate([
+    //         'user_id' => 'required',
+    //         'follow_id' => 'required',
+    //     ]);       
+        
+
+
+    //     Follower::creat([
+    //         'user_id' => $validation['user_id'],
+    //         'follow_id' => $validation['follow_id'],
+    //     ]);
+
+    //     return back();
+    // }
+
 }
