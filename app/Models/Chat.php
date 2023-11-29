@@ -14,10 +14,15 @@ class Chat extends Model
 
     public function get_user($id)
     {
-        if (Chat::where('id', $id)->where('sender_id', Auth::id())->first()) {
-            return User::find(Chat::find($id)->receiver_id);
+        if (Chat::where('id', $id)->where('user_one', Auth::id())->first()) {
+            return User::find(Chat::find($id)->user_two);
         } else {
-            return User::find(Chat::find($id)->sender_id);
+            return User::find(Chat::find($id)->user_one);
         }
+    }
+
+    function chat_messages()
+    {
+        return $this->hasMany(ChatMessage::class, 'chat_id', 'id');
     }
 }

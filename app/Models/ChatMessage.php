@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ChatMessage extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
     protected $guarded = [];
+
+    function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
 }

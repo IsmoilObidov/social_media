@@ -104,6 +104,8 @@
             </div>
         </div>
     </div>
+
+    
     <script>
         function follow(id) {
             var form = new FormData();
