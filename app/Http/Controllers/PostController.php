@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Follow;
 use App\Models\Like;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -155,4 +156,28 @@ class PostController extends Controller
 
         return back();
     }
+ 
+    function follow (Request $req)
+    {
+        $existingFollow = Follow::withTrashed()->where('user_id', Auth::id())->where('post_id', $req->post_id)->first();
+
+        if ($existingFollow) {
+            if ($existingFollow->trashed()) {
+
+                $existingFollow->restore();
+                return 'restored_follow';
+            } else {
+
+                $existingFollow->delete();
+                return 'removed_follow';
+            }
+        } else {
+            Follow::create([
+                'user_id' => Auth::id(),
+                'follower_id' => $req->post_id
+            ]);
+
+            return 'follower and chat';
+        }
+}
 }
