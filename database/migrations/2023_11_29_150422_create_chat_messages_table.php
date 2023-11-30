@@ -13,10 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('chats', function (Blueprint $table) {
+        Schema::create('chat_messages', function (Blueprint $table) {
             $table->integer('id', true);
-            $table->integer('sender_id');
-            $table->integer('receiver_id');
+            $table->integer('user_id');
+            $table->integer('chat_id');
+            $table->string('text');
+            $table->date('date')->useCurrent();
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->nullable();
             $table->dateTime('deleted_at')->nullable();
@@ -30,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('chats');
+        Schema::dropIfExists('chat_messages');
     }
 };
