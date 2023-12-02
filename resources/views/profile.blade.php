@@ -27,19 +27,19 @@
                             <label for="name" class="form-label">Name</label>
                             <input type="text" class="form-control" id="name" aria-describedby="name" name="name"
                                 value="{{ $user->name }}">
-                            <div id="name" class="form-text">We'll never share your email with anyone else.</div>
+
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email address</label>
                             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                                 name="email" value="{{ $user->email }}">
-                            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+
                         </div>
                         <div class="mb-3">
                             <label for="photo" class="form-label">Photo</label>
                             <input type="file" name="photo" class="form-control" id="photo"
                                 aria-describedby="photo" value="{{ $user->photo }}">
-                            <div id="photo" class="form-text">We'll never share your email with anyone else.</div>
+
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Password</label>
