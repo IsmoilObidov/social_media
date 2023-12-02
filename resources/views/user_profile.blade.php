@@ -66,7 +66,7 @@
                         <div class="d-flex flex-column">
 
                             <span class="articles">Posts </span>
-                            <span class="number1">{{ $user->posts->count() }}</span>
+                            <span class="number1">{{ $user->posts->count()}}</span>
 
                         </div>
 
