@@ -67,7 +67,14 @@ class ChatController extends Controller
             'chat_id' => $chat->id,
             'user_id' => Auth::id(),
             'text' => $req->message
+
         ]);
+    Chat::create([
+        'chat_id' => $chat->id,
+        'user_one' => Auth::id(),
+        'user_two' =>  Auth::id(),
+        'text' => $req->message
+    ]);
     }
 
     // function save_chat(Request $req)
