@@ -103,7 +103,7 @@
                                                 <input type="text" id="comment" name="comment" class="form-control">
                                             @endif
                                             <button type="submit" class="btn btn-outline-secondary"
-                                                data-bs-toggle="tooltip" data-bs-placement="top" title="Info"><svg
+                                            data-bs-toggle="tooltip" data-bs-placement="top" title="Info"><svg
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     class="icon icon-tabler icon-tabler-send" width="24" height="17"
                                                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
