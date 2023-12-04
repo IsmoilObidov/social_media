@@ -54,7 +54,6 @@
 
                             </ul>
                             <div class="form-group mt-3 mb-0" id="textarea">
-
                             </div>
                         </div>
                     </div>
@@ -113,6 +112,7 @@
 
             });
 
+
         }
 
         function send_message(id) {
@@ -139,4 +139,5 @@
             });
         }
     </script>
+     <button type="submit">OK</button>
 @endsection
