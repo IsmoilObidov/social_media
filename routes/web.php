@@ -24,22 +24,38 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/', [PostController::class, 'index'])->name('/');
+
     Route::get('/review/{email}', [UserController::class, 'review'])->name('user-profile');
+
     Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+
     Route::post('/edit_profile', [UserController::class, 'edit_profile'])->name('edit_profile');
+
     Route::get('/new_post', [PostController::class, 'new_post'])->name('new_post');
+
     Route::post('/create_post', [PostController::class, 'create_post']);
+
     Route::get('/my_post', [PostController::class, 'my_post'])->name('my_post');
+
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
     Route::get('/post/{id}', [PostController::class, 'post'])->name('post');
+
     Route::post('/save_comment/{id}', [PostController::class, 'save_comment'])->name('save_comment');
+
     Route::post('/like-post', [PostController::class, 'do_like'])->name('do_like');
+
     Route::post('/filter_user', [UserController::class, 'filter_user'])->name('filter_user');
+
     Route::get('/delete_comment/{id}', [PostController::class, 'delete_comment'])->name('delete_comment');
+
     Route::get('/edit_post/{id}', [PostController::class, 'edit_post'])->name('edit_post');
+
     Route::post('/save_edit_post/{id}', [PostController::class, 'save_edit_post'])->name('save_edit_post');
+
     Route::get('/delete_post/{id}', [PostController::class, 'delete_post'])->name('delete_post');
 
+    Route::get('/follow/{id}', [PostController::class, 'follow'])->name('follow');
 
     Route::post('/follow_user', [FollowerController::class, 'follow'])->name('follow');
 
@@ -54,3 +70,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/new_chat',[ChatController::class,'new_chat'])->name('new_chat');
 });
+
+
+
+
