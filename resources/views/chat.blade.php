@@ -47,7 +47,7 @@
                     </div>
                     <div class="col-xl-8 col-lg-8 col-md-8 col-sm-9 col-9">
                         <div class="selected-user">
-                            <span>To: <span class="name"></span></span>
+                            <span>To: <span class="name" ></span></span>
                         </div>
                         <div class="chat-container">
                             <ul class="chat-box chatContainerScroll" id="chatbox">
