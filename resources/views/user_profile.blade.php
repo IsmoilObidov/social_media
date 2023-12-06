@@ -89,7 +89,8 @@
 
 
                     <div class="button mt-2 d-flex flex-row align-items-center">
-                        <button class="btn btn-sm btn-outline-primary w-100">Chat</button>
+                        <button class="btn btn-sm btn-outline-primary w-100"
+                            onclick="send_chat({{ $user->id }})">Chat</button>
                         <div id="follow_button">
                             @if (\App\Models\Follower::where('user_id', $user->id)->where('follower_id', Auth::id())->first())
                                 <button class="btn btn-sm btn-danger w-100 ml-2" type="button"
@@ -105,7 +106,7 @@
         </div>
     </div>
 
-    
+
     <script>
         function follow(id) {
             var form = new FormData();
@@ -140,6 +141,27 @@
 
                         break;
                 }
+
+            });
+        }
+
+        function send_chat(id) {
+            var form = new FormData();
+            form.append("receiver_id", id);
+            form.append("_token", '{{ csrf_token() }}');
+
+            var settings = {
+                "url": "http://social.loc/new_chat",
+                "method": "POST",
+                "timeout": 0,
+                "processData": false,
+                "contentType": false,
+                "data": form
+            };
+
+            $.ajax(settings).done(function(response) {
+
+                window.location.href = '/chat';
 
             });
         }
